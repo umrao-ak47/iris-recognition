@@ -1,25 +1,25 @@
-from settings import *
 import cv2
 import numpy as np
 import queue
+import os, sys
 
 
 
 """
-Read all images in dataset and return Images and 
+Read all images in given path and return Images and 
 Labels in a dictionary as a numpy array
 """
-def read_data():
+def read_data(path):
     """
      Internal function : Read and returns all the images path
     """
-    def read_directory():
+    def read_directory(path):
         # store read images path in a list
         res = []
         # store all the folder in a queue to walk the dirs
         folder_queue = queue.SimpleQueue()
         # put dataset folder as first entry to enumerate
-        folder_queue.put(DATA_FOLDER_PATH)
+        folder_queue.put(path)
         while not folder_queue.empty():
             # scan the directory
             for path in os.scandir(folder_queue.get()):
@@ -35,7 +35,7 @@ def read_data():
     imgs = []
     labels = []
     # read all paths using internal function
-    files = read_directory()
+    files = read_directory(path)
     # read path as image and get the labels
     for file in files:
         lis = file.path.split('\\')
@@ -54,9 +54,12 @@ def read_data():
 # Testing code
 if __name__=="__main__":
     # Test read data function
-    data = read_data()
+    curdir = os.path.dirname(__file__)
+    pdir = os.path.abspath(os.path.join(curdir, os.path.pardir))
+    sys.path.insert(0, pdir)
+    import settings
+    data = read_data(settings.DATA_FOLDER_PATH)
     cv2.imshow("Image", data['imgs'][0])
     print(data['labels'][0])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-

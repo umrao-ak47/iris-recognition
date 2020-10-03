@@ -1,8 +1,10 @@
-from utils import read_data
 import cv2
 import numpy as np
+from utils import read_data
+import settings
 
-data = read_data()
+
+data = read_data(settings.DATA_FOLDER_PATH)
 images = data['imgs']
 labels = data['labels']
 # show a sample image
