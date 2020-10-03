@@ -1,2 +1,2 @@
 # iris-recognition
-A model for biometric identifiaction using iris.
+A model for biometric identification using iris.
