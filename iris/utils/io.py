@@ -75,6 +75,24 @@ class CameraReader:
         pass
 
 
+class ImageViewer:
+    def __init__(self):
+        self.images = []
+        self.labels = []
+        self.count = 0
+
+    def addImage(self, label, image):
+        self.labels.append(label)
+        self.images.append(image)
+        self.count += 1
+    
+    def show(self):
+        for i in range(self.count):
+            cv2.imshow(self.labels[i], self.images[i])
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+
 
 # Testing code
 if __name__=="__main__":

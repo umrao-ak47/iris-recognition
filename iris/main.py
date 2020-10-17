@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import utils
 import utils.contours
 import settings
-from utils import ImageDataReader
+from utils import ImageDataReader, ImageViewer
 
 def extract_eyelid(img):
     smooth_img = img
@@ -18,9 +18,12 @@ def extract_eyelid(img):
 
 
 reader = ImageDataReader()
+viewer = ImageViewer()
+
 data = reader.read(settings.DATA_FOLDER_PATH)
 
 # choose a sample image
 img = data["1"]["left"][0]
-
+viewer.addImage("1-Left", img)
+viewer.show()
 
