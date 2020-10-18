@@ -2,7 +2,7 @@
 import os
 
 # Project Folder
-PROJECT_FOLDER_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+PROJECT_FOLDER_PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Name of the folder where data resides
 DATA_FOLDER_NAME = 'MMU-Iris-Database'

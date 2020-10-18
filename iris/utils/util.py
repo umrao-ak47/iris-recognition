@@ -2,14 +2,6 @@ import cv2
 import numpy as np
 
 
-"""
-Returns an binary image for a GRAYSCALE image using 
-calculated threshold value. Taking 5 regions in iris images
-"""
-def binarize_image(img):
-    threshold = np.max(img)/5
-    _, binary_image = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY_INV)
-    return binary_image
 
 def moving_avg(hist, alpha=0.9):
     ### calculate avg
@@ -33,3 +25,11 @@ def window_avg(hist, size=10, alpha=0.9):
             sum = sum+hist[i]-hist[i-size]
             vec.append(avg)
     return vec
+
+
+def extractPupil(img):
+    # img = cv2.GaussianBlur(img, ksize=(3, 3), sigmaX=0)
+    threshold = np.max(img)/5
+    _, binary_image = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY_INV)
+    res = cv2.medianBlur(binary_image, ksize=7)
+    return res
